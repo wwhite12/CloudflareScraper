@@ -34,6 +34,8 @@ for i in tbody.findAll('tr'):
 
 #zip header_row and spec_row into a dict to match each key with its corresponding value      
 final = dict(zip(header_row,spec_row))
-
+#dict to json, write json to separate file
 with open('/Users/willwhite/Documents/dataTests/test.json','w') as json_file:
     json.dump(final, json_file)
+
+#TO-DO: Need to have second loop dynamically create lists if more than one 'tr', then create loop at end to zip each list to the header_row list
