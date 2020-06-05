@@ -12,10 +12,6 @@ table = soup.find('table')
 thead = table.find('thead')
 tbody = table.find('tbody')
 
-tags = re.compile(r'<[^>]+>')
-def remove_html(deet):
-    return deet.replace(tags,'')
-
 #loop through thead, put all the headers into an array as strings
 header_row = []
 for header in thead.findAll('th'):
