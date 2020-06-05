@@ -24,18 +24,22 @@ for header in thead.findAll('th'):
     header_row.append(cleanHeader)
 
 spec_row = []
-#print(tbody.findAll('tr'))
+numLists = len(tbody.findAll('tr'))
+depth = [[]]*numLists
+counter = 0
+
 for i in tbody.findAll('tr'):
     info = tbody.findAll(['th','td'])
     for data in info:
         strdata = str(data)
         noTag = re.sub('<\w+>|</\w+>','',strdata)
-        spec_row.append(noTag)
+        depth[counter].append(noTag)
 
-#zip header_row and spec_row into a dict to match each key with its corresponding value      
-final = dict(zip(header_row,spec_row))
-#dict to json, write json to separate file
-with open('/Users/willwhite/Documents/dataTests/test.json','w') as json_file:
-    json.dump(final, json_file)
+    counter+= 1
 
-#TO-DO: Need to have second loop dynamically create lists if more than one 'tr', then create loop at end to zip each list to the header_row list
+#zip header_row and spec_row into a dict to match each key with its corresponding value 
+# loop through tbody entries, for each one, zip to the headers list, output that to external file     
+for x in range(len(depth)):
+    final = dict(zip(header_row,depth[x]))
+    with open('/Users/willwhite/Documents/dataTests/test.json','w') as json_file:
+        json.dump(final,json_file)
