@@ -12,6 +12,10 @@ table = soup.find('table')
 thead = table.find('thead')
 tbody = table.find('tbody')
 
+tags = re.compile(r'<[^>]+>')
+def remove_html(deet):
+    return deet.replace(tags,'')
+
 #loop through thead, put all the headers into an array as strings
 header_row = []
 for header in thead.findAll('th'):
@@ -30,4 +34,6 @@ for i in tbody.findAll('tr'):
 
 #zip header_row and spec_row into a dict to match each key with its corresponding value      
 final = dict(zip(header_row,spec_row))
-print(final)
+
+with open('/Users/willwhite/Documents/dataTests/test.json','w') as json_file:
+    json.dump(final, json_file)
