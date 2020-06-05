@@ -12,22 +12,19 @@ table = soup.find('table')
 thead = table.find('thead')
 tbody = table.find('tbody')
 
-tags = re.compile(r'<[^>]+>')
-def remove_html(deet):
-    return deet.replace(tags,'')
-
-#loop through thead, put all the headers into an array as strings
+#loop through thead, put all the headers into list as strings
 header_row = []
 for header in thead.findAll('th'):
     strheader = str(header)
     cleanHeader = re.sub('<\w+>|</\w+>','',strheader)
     header_row.append(cleanHeader)
 
-spec_row = []
+#declare variables used for tbody looping
 numLists = len(tbody.findAll('tr'))
 depth = [[]]*numLists
 counter = 0
 
+#loop through tbody, find all th and td. convert to strings, remove html tags, dynamically create lists depending on how many tr's
 for i in tbody.findAll('tr'):
     info = tbody.findAll(['th','td'])
     for data in info:
