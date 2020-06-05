@@ -20,8 +20,6 @@ for header in thead.findAll('th'):
     header_row.append(cleanHeader)
 
 #declare variables used for tbody looping
-numLists = len(tbody.findAll('tr'))
-depth = [[]]*numLists
 counter = 0
 myDict = {}
 for num in range(len(tbody.findAll('tr'))):
@@ -46,6 +44,5 @@ for i in tbody.findAll('tr'):
 # loop through tbody entries, for each one, zip to the headers list, output that to external file     
 for set in range(len(myDict)):
     final = dict(zip(header_row,myDict[set]))
-    print(final)
-    #with open('/Users/willwhite/Documents/dataTests/test.json','w') as json_file:
-     #   json.dump(final,json_file)
+    with open('/Users/willwhite/Documents/dataTests/test.json','a+') as json_file:
+       json.dump(final,json_file)
