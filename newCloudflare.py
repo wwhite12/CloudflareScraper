@@ -5,7 +5,7 @@ import re
 
 https = urllib3.PoolManager()
 #GET request to url, BeautifulSoup to return html table
-cf_page = https.request('GET','https://developers.cloudflare.com/waf/change-log/2020-05-04/')
+cf_page = https.request('GET','https://developers.cloudflare.com/waf/change-log/scheduled-changes/')
 cf_resp = cf_page.data.decode('utf-8')
 soup = BeautifulSoup(cf_resp,'html.parser')
 table = soup.find('table')
@@ -44,5 +44,5 @@ for i in tbody.findAll('tr'):
 # loop through tbody entries, for each one, zip to the headers list, output that to external file     
 for set in range(len(myDict)):
     final = dict(zip(header_row,myDict[set]))
-    with open('/Users/willwhite/Documents/dataTests/test.json','a+') as json_file:
+    with open('/insert/path/to/output/file','a+') as json_file:
        json.dump(final,json_file)
